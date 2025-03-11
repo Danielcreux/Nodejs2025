@@ -1,0 +1,212 @@
+/* estilo.css */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+body {
+  font-family: Ubuntu, Arial, sans-serif;
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+img {
+  width: 50px;
+}
+h1{
+	font-size:15px;
+}
+
+h1 {
+  margin: 10px 0;
+}
+
+/* Container for the chat application */
+#chat-container {
+  display: flex;
+  width: 90%;
+  max-width: 800px;
+  height: 600px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Left Pane: User List */
+#user-list {
+  width: 25%;
+  background: #f1f1f1;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  text-align:center;
+}
+#usuarios{
+	text-align:left;
+}
+#usuarios li{
+	background:white;
+	color:black;
+	padding:10px;
+	border-radius:5px;
+}
+#usuarios li a{
+	text-decoration:none;
+	color:inherit;
+}
+
+
+#user-list h2 {
+  margin-top: 0;
+}
+
+#user-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+#user-list li {
+  margin: 5px 0;
+}
+
+#user-list a {
+  text-decoration: none;
+  color: #007bff;
+  cursor: pointer;
+}
+
+#user-list a:hover {
+  text-decoration: underline;
+}
+
+/* Right Pane: Chat Messages and Input */
+#chat-pane {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#current-room {
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#mensajes {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  overflow-y: auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+article {
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: background 0.3s;
+}
+
+article:hover {
+  background: rgba(0, 123, 255, 0.1);
+}
+
+h6 {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+p {
+  margin: 5px 0 0;
+}
+
+#enviamensaje {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  background: white;
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#mensaje {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+#enviar {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+  margin-left: 5px;
+}
+
+#enviar:hover {
+  background: #0056b3;
+}
+
+#selectoremojis {
+  position: relative;
+}
+
+#emoji {
+  background: none;
+  border: none;
+  font-size: 22px; /* Aumenté el tamaño para mejor visibilidad */
+  cursor: pointer;
+  padding: 8px;
+}
+
+#emojis {
+  display: none;
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 220px; /* Ajusté el ancho para que se vea mejor */
+  height: 180px; /* Aumenté la altura para más emojis visibles */
+  overflow-y: auto;
+  background: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px; /* Espaciado entre emojis */
+  justify-content: center; /* Centra los emojis */
+}
+
+#emojis span {
+  cursor: pointer;
+  display: inline-flex; /* Mejora alineación */
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  font-size: 22px; /* Aumenté tamaño para mejor visibilidad */
+  transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
+  border-radius: 5px;
+}
+
+#emojis span:hover {
+  background: rgba(0, 123, 255, 0.2);
+  transform: scale(1.2); /* Efecto de zoom al pasar el mouse */
+}

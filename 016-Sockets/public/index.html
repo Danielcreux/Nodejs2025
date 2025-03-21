@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat en Sala</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+<h1>Chat en Sala</h1>
+
+<!-- Formulario para ingresar el nombre de usuario -->
+<div id="username-section">
+    <label for="username-input">Nombre de usuario:</label>
+    <input type="text" id="username-input" placeholder="Ingresa tu nombre">
+    <button id="join-room">Unirse a la sala</button>
+</div>
+
+<div id="chat-section" style="display:none;">
+    <h2>Bienvenido a la sala de chat</h2>
+    <div id="chat-box"></div>
+    <input type="text" id="message-input" placeholder="Escribe un mensaje...">
+    <button id="send-message">Enviar</button>
+</div>
+
+<script>
+    const socket = io();
+    
+    // Unirse a la sala cuando el usuario hace clic en "Unirse a la sala"
+    document.getElementById('join-room').addEventListener('click', () => {
+        const username = document.getElementById('username-input').value;
+        
+        // Validar que el nombre de usuario no esté vacío
+        if (username.trim() === '') {
+            alert('Por favor ingresa un nombre de usuario');
+            return;
+        }
+
+        const roomId = "1234";  // Puedes hacer que esto también sea dinámico si lo deseas
+
+        // Emitir evento para unirse a la sala con el nombre de usuario
+        socket.emit("join-room", { roomId, username });
+
+        // Ocultar la sección de nombre de usuario y mostrar la sala de chat
+        document.getElementById('username-section').style.display = 'none';
+        document.getElementById('chat-section').style.display = 'block';
+    });
+
+    // Manejar la notificación de que el usuario se unió a la sala
+    socket.on("joined-room", (data) => {
+        console.log(`Te uniste a la sala ${data.roomId} como ${data.username}`);
+    });
+
+    // Recibir un mensaje de chat
+    socket.on("chat-message", (data) => {
+        const chatBox = document.getElementById("chat-box");
+        const messageElement = document.createElement("p");
+        messageElement.textContent = `${data.username}: ${data.text}`;
+        chatBox.appendChild(messageElement);
+    });
+
+    // Enviar un mensaje de chat
+    document.getElementById("send-message").addEventListener("click", () => {
+        const messageInput = document.getElementById("message-input");
+        const messageText = messageInput.value;
+
+        if (messageText) {
+            socket.emit("chat-message", messageText);
+            messageInput.value = ''; // Limpiar el campo de texto después de enviar
+        }
+    });
+</script>
+
+</body>
+</html>
+
+

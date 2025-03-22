@@ -1,5 +1,6 @@
 const express = require('express');
-const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const { Server } = require('socket.io');
 const path = require('path');
 
@@ -9,7 +10,7 @@ const options = {
 };
 
 const app = express();
-const server = http.createServer(app);
+const server = https.createServer(options, app);
 const io = new Server(server);
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -32,6 +33,7 @@ io.on('connection', (socket) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+const PORT = process.env.PORT || 8443;
+server.listen(PORT, () => console.log(`Server running on https://217.154.6.203`));
+
 
